@@ -1,0 +1,2 @@
+function sumTo(n) {
+}
