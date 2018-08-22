@@ -10,13 +10,14 @@
   "author": "atsybulskiy",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.1.1",
+    "bootstrap": "^4.1.3",
     "jquery": "^3.3.1"
   },
   "devDependencies": {
     "css-loader": "^1.0.0",
-    "style-loader": "^0.21.0",
-    "webpack": "^4.16.1",
-    "webpack-cli": "^3.0.8"
+    "html-webpack-plugin": "^3.2.0",
+    "style-loader": "^0.22.1",
+    "webpack": "^4.17.1",
+    "webpack-cli": "^3.1.0"
   }
 }
