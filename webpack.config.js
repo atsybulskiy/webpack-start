@@ -5,17 +5,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
-        index: './index.js',
-        profile: './profile.js'
+        index: './index',
+        profile: './profile',
+        main: './main'
     },
     output: {
-        //filename: 'bundle.js',
-        filename: '[name].js',
+        filename: '[name].[hash].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     mode: 'development',
     resolve: {
-        extensions: ['.js']
+        extensions: ['.ts', '.js']
     },
     watch: false,
     devtool: 'source-map',
@@ -53,9 +53,26 @@ module.exports = {
             PRODUCTION: false,
             HTML5_SUPPORT: true
         }),
+        new webpack.HotModuleReplacementPlugin({
+            // Options...
+        })
         // new webpack.ProvidePlugin({
         //     $: 'jquery'
         // })
+    ],
 
-    ]
+    module: {
+        rules: [
+            {
+                test: /\.ts?$/,
+                loader: 'awesome-typescript-loader'
+            }
+        ]
+    },
+
+    devServer: {
+        port: 9000,
+        hot: true,
+        noInfo: true
+    }
 };
