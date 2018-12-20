@@ -6,8 +6,6 @@ module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
         index: './index',
-        profile: './profile',
-        main: './main'
     },
     output: {
         filename: '[name].[hash].bundle.js',
@@ -55,10 +53,11 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin({
             // Options...
+        }),
+        new webpack.ProvidePlugin({
+            $: 'jquery',
+            jQuery: "jquery"
         })
-        // new webpack.ProvidePlugin({
-        //     $: 'jquery'
-        // })
     ],
 
     module: {
