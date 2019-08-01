@@ -80,19 +80,25 @@
     });
 }*/
 
-export default function highChart(data) {
+export default function highChart(id, data) {
+    const score = Math.round(data.impact * 100) / 10;
+    const scoreColor = Math.floor(data.impact / 2) - (data.impact % 2 === 0 ? 1 : 0);
+    console.log('%c⇒ %', 'color: #82AAFF', data.impact % 2);
+    console.log('%c⇒ data.impact', 'color: #82AAFF', data.impact);
+    console.log('%c⇒ scoreColor', 'color: #82AAFF', scoreColor);
 
     Highcharts.setOptions({
-        colors: ['#ff5722', '#ff9800', '#ffc107', '#ffeb3b', '#cddc39', '#8bc34a', '#4caf50']
+        colors: ['#ff5722', '#ffc107', '#cddc39', '#8bc34a', '#4caf50']
     });
 
-    Highcharts.chart('container', {
+    Highcharts.chart(id, {
         credits: false,
         chart: {
             type: 'solidgauge',
             height: '100%',
-            width: '35',
-            spacing: [0,0,0,0]
+            width: '30',
+            spacing: [0, 0, 0, 0],
+            className: 'h10-score-chart'
         },
 
         title: null,
@@ -105,26 +111,12 @@ export default function highChart(data) {
             size: '100%',
             startAngle: 0,
             endAngle: 360,
-            background: [{ // Track for Move
+            background: [{
                 outerRadius: '100%',
                 innerRadius: '80%',
                 backgroundColor: '#dbe2e8',
                 borderWidth: 0
-            }/*, { // Track for Exercise
-                outerRadius: '87%',
-                innerRadius: '63%',
-                backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[1])
-                    .setOpacity(0.3)
-                    .get(),
-                borderWidth: 0
-            }, { // Track for Stand
-                outerRadius: '62%',
-                innerRadius: '38%',
-                backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[2])
-                    .setOpacity(0.3)
-                    .get(),
-                borderWidth: 0
-            }*/]
+            }]
         },
 
         yAxis: {
@@ -137,7 +129,18 @@ export default function highChart(data) {
         plotOptions: {
             solidgauge: {
                 dataLabels: {
-                    enabled: false
+                    borderWidth: 0,
+                    enabled: true,
+                    useHTML: true,
+                    className: 'h10-label',
+                    style: {
+                        fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif`,
+                        fontWeight: 'normal',
+                        fontSize: '12px',
+                    },
+                    formatter: function () {
+                        return Highcharts.numberFormat(this.y / 10, 0);
+                    },
                 },
                 linecap: 'round',
                 stickyTracking: false,
@@ -147,29 +150,13 @@ export default function highChart(data) {
 
         series: [
             {
-                name: 'Move',
+                name: data.title,
                 data: [{
-                    color: Highcharts.getOptions().colors[6],
+                    color: Highcharts.getOptions().colors[scoreColor],
                     radius: '100%',
                     innerRadius: '80%',
-                    y: 80
+                    y: score
                 }]
-            }/*, {
-                name: 'Exercise',
-                data: [{
-                    color: Highcharts.getOptions().colors[1],
-                    radius: '87%',
-                    innerRadius: '63%',
-                    y: 65
-                }]
-            }, {
-                name: 'Stand',
-                data: [{
-                    color: Highcharts.getOptions().colors[2],
-                    radius: '62%',
-                    innerRadius: '38%',
-                    y: 50
-                }]
-            }*/]
+            }]
     });
 }

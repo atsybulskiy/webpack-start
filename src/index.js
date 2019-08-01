@@ -19,25 +19,56 @@ const viabilityScore = {
     }, {
         title: "Rating: Average",
         description: "High average rating indicates a need for high quality product.",
-        impact: 1.2
+        impact: 2
     }, {
         title: "Number of competing products",
         description: "Number of competitors not available",
-        impact: 1.1363636363636365
+        impact: 3
     }, {
         title: "Price : Average",
         description: "Moderate cost, low entry barrier niche.",
-        impact: 1.1
+        impact: 4
     }, {
         title: "Price: Standard Deviation",
         description: "Moderate variation in pricing.",
-        impact: 1.095890410958904
+        impact: 5
+    }, {
+        title: "Price: Standard Deviation",
+        description: "Moderate variation in pricing.",
+        impact: 6
+    }, {
+        title: "Price: Standard Deviation",
+        description: "Moderate variation in pricing.",
+        impact: 7
+    }, {
+        title: "Price: Standard Deviation",
+        description: "Moderate variation in pricing.",
+        impact: 8
+    }, {
+        title: "Price: Standard Deviation",
+        description: "Moderate variation in pricing.",
+        impact: 9
+    }, {
+        title: "Price: Standard Deviation",
+        description: "Moderate variation in pricing.",
+        impact: 10
     }]
 };
 
 function drawCharts(viabilityScore) {
     const list = viabilityScore.list;
     console.log('%c⇒ list', 'color: #82AAFF', list);
+    const chartContainer = document.getElementById('chart-container');
+    console.log('%c⇒ chartContainer', 'color: #82AAFF', chartContainer);
+    list.forEach((item, index) => {
+        console.log('%c⇒ item', 'color: #82AAFF', item, index);
+        const chartId = `score-${index}`;
+        let chartItem = document.createElement('div');
+        chartItem.id = chartId;
+        chartContainer.appendChild(chartItem);
+        console.log('%c⇒ item', 'color: #82AAFF', item);
+        highChart(chartId, item);
+    })
 }
 
-highChart(viabilityScore);
+drawCharts(viabilityScore);
