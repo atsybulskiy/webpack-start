@@ -1,13 +1,15 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const preCss = require('precss');
+const autoprefixer = require('autoprefixer');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
     entry: {
         index: './index',
-        profile: './profile',
-        main: './main'
+        // profile: './profile',
+        // main: './main'
     },
     output: {
         filename: '[name].[hash].bundle.js',
@@ -55,7 +57,8 @@ module.exports = {
         }),
         new webpack.HotModuleReplacementPlugin({
             // Options...
-        })
+        }),
+        require('autoprefixer')
         // new webpack.ProvidePlugin({
         //     $: 'jquery'
         // })
@@ -66,6 +69,10 @@ module.exports = {
             {
                 test: /\.ts?$/,
                 loader: 'awesome-typescript-loader'
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader", "postcss-loader"]
             }
         ]
     },
