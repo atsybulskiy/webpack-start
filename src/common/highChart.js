@@ -1,94 +1,27 @@
-/*export default function highChart() {
-    $(function() {
-        const divID = 'container';
-        const dataC = {
-            'title': null,
-            'seriesDataConnections': 7,
-            'seriesData': 80
-        };
-
-        new Highcharts.Chart({
-            credits: false,
-            chart: {
-                renderTo: divID,
-                type: 'solidgauge',
-            },
-            title: null,
-            exporting: {
-                enabled: false
-            },
-            tooltip: {
-                enabled: false
-            },
-            pane: {
-                startAngle: 0,
-                endAngle: 360,
-                background: [{
-                    outerRadius: '106%',
-                    innerRadius: '94%',
-                    backgroundColor: Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0.3).get(),
-                    borderWidth: 0
-                }]
-            },
-            yAxis: {
-                min: 0,
-                max: 100,
-                lineWidth: 0,
-                tickPositions: []
-            },
-            plotOptions: {
-                solidgauge: {
-                    borderWidth: 2,
-                    dataLabels: {
-                        enabled: true,
-                        y: 0,
-                        borderWidth: 0,
-                        backgroundColor: 'none',
-                        useHTML: true,
-                        shadow: false,
-                        style: {
-                            fontSize: '16px'
-                        },
-                        formatter: function() {
-                            return '<span style="color:' + Highcharts.getOptions().colors[0] + ';">' + Highcharts.numberFormat(this.y / 10, 0) + '</span>';
-                        }
-                    },
-                    linecap: 'round',
-                    stickyTracking: true
-                }
-            },
-            series: [{
-                borderColor: Highcharts.getOptions().colors[0],
-                data: [{
-                    color: Highcharts.getOptions().colors[0],
-                    radius: '100%',
-                    innerRadius: '100%',
-                    y: dataC.seriesData
-                }]
-            }],
-            lang: {
-                noData: "No data to display"
-            },
-            noData: {
-                style: {
-                    fontWeight: 'bold',
-                    fontSize: '15px',
-                    color: '#333333'
-                }
-            }
-        });
-    });
-}*/
-
 export default function highChart(id, data) {
-    const score = Math.round(data.impact * 100) / 10;
-    const scoreColor = Math.floor(data.impact / 2) - (data.impact % 2 === 0 ? 1 : 0);
-    console.log('%c⇒ %', 'color: #82AAFF', data.impact % 2);
-    console.log('%c⇒ data.impact', 'color: #82AAFF', data.impact);
-    console.log('%c⇒ scoreColor', 'color: #82AAFF', scoreColor);
+    const score = 1 / data.impact * 10;
+    const scoreColor = Math.floor(score / 2) - (score % 2 === 0 ? 1 : 0);
+
+    const options = {
+        width: 34,
+        className: 'h10-score-chart',
+        backgroundColor: '#dbe2e8',
+        min: 0,
+        max: 10,
+        label: {
+            className: 'h10-label',
+            decimals: 1,
+            style: {
+                fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif`,
+                fontWeight: 'normal',
+                fontSize: '12px',
+            },
+        },
+        colors: ['#ff5722', '#ffc107', '#cddc39', '#8bc34a', '#4caf50']
+    };
 
     Highcharts.setOptions({
-        colors: ['#ff5722', '#ffc107', '#cddc39', '#8bc34a', '#4caf50']
+        colors: options.colors
     });
 
     Highcharts.chart(id, {
@@ -96,9 +29,9 @@ export default function highChart(id, data) {
         chart: {
             type: 'solidgauge',
             height: '100%',
-            width: '30',
+            width: options.width,
             spacing: [0, 0, 0, 0],
-            className: 'h10-score-chart'
+            className: options.className
         },
 
         title: null,
@@ -114,14 +47,14 @@ export default function highChart(id, data) {
             background: [{
                 outerRadius: '100%',
                 innerRadius: '80%',
-                backgroundColor: '#dbe2e8',
+                backgroundColor: options.backgroundColor,
                 borderWidth: 0
             }]
         },
 
         yAxis: {
-            min: 0,
-            max: 100,
+            min: options.min,
+            max: options.max,
             lineWidth: 0,
             tickPositions: []
         },
@@ -132,14 +65,10 @@ export default function highChart(id, data) {
                     borderWidth: 0,
                     enabled: true,
                     useHTML: true,
-                    className: 'h10-label',
-                    style: {
-                        fontFamily: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif`,
-                        fontWeight: 'normal',
-                        fontSize: '12px',
-                    },
+                    className: options.label.className,
+                    style: options.label.style,
                     formatter: function () {
-                        return Highcharts.numberFormat(this.y / 10, 0);
+                        return Highcharts.numberFormat(data.impact, options.label.decimals);
                     },
                 },
                 linecap: 'round',

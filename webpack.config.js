@@ -1,8 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 // const preCss = require('precss');
-const autoprefixer = require('autoprefixer');
+// const autoprefixer = require('autoprefixer');
 
 module.exports = {
     context: path.resolve(__dirname, 'src'),
@@ -12,14 +13,14 @@ module.exports = {
         // main: './main'
     },
     output: {
-        filename: '[name].[hash].bundle.js',
+        filename: 'bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
     mode: 'development',
     resolve: {
         extensions: ['.ts', '.js']
     },
-    watch: false,
+    watch: true,
     devtool: 'source-map',
 
     optimization: {
@@ -47,7 +48,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Learn JavaScript',
-            hash: true,
+            hash: false,
             template: './index.html'
         }),
         new webpack.DefinePlugin({
@@ -58,6 +59,9 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin({
             // Options...
         }),
+        new CopyPlugin([
+            { from: 'images', to: 'images' }
+        ]),
         require('autoprefixer')
         // new webpack.ProvidePlugin({
         //     $: 'jquery'
@@ -73,7 +77,22 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader", "postcss-loader"]
-            }
+            },
+            {
+                test: /\.(png|jpg|svg)$/,
+                loader: 'url-loader'
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // Creates `style` nodes from JS strings
+                    'style-loader',
+                    // Translates CSS into CommonJS
+                    'css-loader',
+                    // Compiles Sass to CSS
+                    'sass-loader',
+                ],
+            },
         ]
     },
 

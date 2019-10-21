@@ -3,57 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <title>Learn JavaScript</title>
-    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/highcharts-more.js"></script>
-    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
-    <style>
-        .chart-container {
-            background: #fff;
-            padding: 10px;
-            display: flex;
-            align-items: center;
-            /*justify-content: space-between;*/
-            min-height: 50px;
-            box-sizing: border-box;
-        }
-
-        .chart-container > div {
-            margin: 0 3px;
-        }
-
-        .h10-score-chart .highcharts-data-labels {
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-        }
-
-        .h10-score-chart .highcharts-data-labels span {
-            top: 0 !important;
-            bottom: 0;
-            left: 0 !important;
-            right: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 30px;
-            height: 30px;
-            user-select: none;
-        }
-
-        .highcharts-label {
-            left: 0 !important;
-            top: 0 !important;
-        }
-    </style>
+    <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&display=swap&subset=cyrillic,cyrillic-ext,latin-ext"
+          rel="stylesheet">
 </head>
-<body style="background: #263238; color: #fff">
+<body>
 <main class="container">
-    <pre id="input">
-        loading...
-    </pre>
-    <div id="chart-container" class="chart-container"></div>
+    <div class="row mt-3">
+        <div class="col-lg-5">
+            <div class="blackbox">
+                <div class="window">
+                    <img src="images/blackbox/window.svg" alt="">
+                </div>
+                <div class="form animated fadeOutUp">
+                    <img src="images/blackbox/form.svg" alt="">
+                </div>
+                <div class="products-list wow fadeInUp">
+                    <img src="images/blackbox/product-list.svg" alt="">
+                </div>
+                <div class="price wow fadeInUp delay-1s">
+                    <img src="images/blackbox/price.svg" alt="">
+                </div>
+                <div class="rating wow fadeInUp delay-1s">
+                    <img src="images/blackbox/rating.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 offset-lg-1">
+            Xray – Amazon Product Research, inside the Helium 10 Chrome Extension, helps give Amazon sellers a bird’s-eye view of a market as they browse through Amazon. Open up Xray on an Amazon search results page or product page, to validate potential product opportunities that you’re considering sourcing.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-5 offset-1">
+            <div class="xray">
+                <div class="browser">
+                    <img src="images/xray/browser.svg" alt="">
+                </div>
+                <div class="overlay wow fadeIn">
+                    <img src="images/xray/overlay.svg" alt="">
+                </div>
+                <div class="table wow fadeInUp">
+                    <img src="images/xray/extension.svg" alt="">
+                </div>
+                <div class="chart wow fadeInLeft">
+                    <img src="images/xray/chart.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="scribbles">
+                <div class="window"></div>
+                <div class="amazon wow fadeIn"></div>
+                <div class="slider-box wow fadeInUp">
+                    <div class="line-gradient">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 offset-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-5 offset-1">
+            <div class="cerebro">
+                <div class="window"></div>
+                <div class="overlay wow list-loading"></div>
+                <div class="export wow fadeInUp delay-1s"></div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="rg">
+                <div class="wow bounceInLeft block block-1"></div>
+                <div class="wow bounceInRight block block-2"></div>
+                <div class="wow bounceInLeft block block-3"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 offset-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6"></div>
+        <div class="col-lg-5 offset-1">
+            <div class="inventory-protector">
+                <div class="window"></div>
+                <div class="product wow fadeIn"></div>
+            </div>
+        </div>
+    </div>
 </main>
+<script src="../node_modules/wowjs/dist/wow.min.js"></script>
 </body>
 </html>
